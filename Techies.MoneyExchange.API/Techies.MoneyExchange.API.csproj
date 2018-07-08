@@ -4,8 +4,11 @@
     <UserSecretsId>aspnet-Techies.MoneyExchange.API-00D467C6-601B-4347-8DC7-158043DD9CCC</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.3" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
@@ -13,6 +16,8 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Techies.MoneyExchange.Application\Techies.MoneyExchange.Application.csproj" />
+    <ProjectReference Include="..\Techies.MoneyExchange.Domain\Techies.MoneyExchange.Domain.csproj" />
+    <ProjectReference Include="..\Techies.MoneyExchange.Infrastructure\Techies.MoneyExchange.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

@@ -1,14 +1,21 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using System.Text;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Techies.MoneyExchange.API.Data;
+using Techies.MoneyExchange.Infrastructure.Persistence.EF.Core;
 
 namespace Techies.MoneyExchange.API
 {
@@ -22,10 +29,11 @@ namespace Techies.MoneyExchange.API
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            // ===== Add our DbContext ========
-            services.AddDbContext<ApplicationDbContext>();
+            // ===== Add our DbContexts ========
+            services.AddDbContext<MoneyExchangeDbContext>(opt=> opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(opt=> opt.UseSqlServer(Configuration.GetConnectionString("SecurityConnection")));
             
             // ===== Add Identity ========
             services.AddIdentity<IdentityUser, IdentityRole>()
@@ -57,6 +65,17 @@ namespace Techies.MoneyExchange.API
 
             // ===== Add MVC ========
             services.AddMvc();
+
+            var builder = new ContainerBuilder();
+            builder.Populate(services);
+
+            // ===== Add Application Services ========
+            builder.RegisterAssemblyTypes(Assembly.Load("Techies.MoneyExchange.Application"))
+                .Where(x => x.Name.EndsWith("Service")).AsSelf().InstancePerLifetimeScope();
+
+            builder.RegisterType<ExchangeDataSeed>();
+
+            return new AutofacServiceProvider(builder.Build());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +88,14 @@ namespace Techies.MoneyExchange.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                // ==== Initialize Seed Data ====
+                using (var serviceScope = app.ApplicationServices.CreateScope())
+                {
+                    var scopeServiceProvider = serviceScope.ServiceProvider;
+                    var db = scopeServiceProvider.GetService<ExchangeDataSeed>();
+                    db.Initialize().Wait();
+                }
             }
 
             // ===== Use Authentication ======

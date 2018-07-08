@@ -15,6 +15,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Domain", "3. Domain", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Infrastructure", "4. Infrastructure", "{1AB038E6-751F-480F-ABD7-4CF7C87FD48D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Techies.MoneyExchange.Infrastructure", "Techies.MoneyExchange.Infrastructure\Techies.MoneyExchange.Infrastructure.csproj", "{71B0294B-A5CC-4E1C-B868-D794D4B6297E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Techies.MoneyExchange.Domain", "Techies.MoneyExchange.Domain\Techies.MoneyExchange.Domain.csproj", "{4AC46A8E-EE69-4768-A569-2FEF46C177EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Test", "5. Test", "{D3295780-62A8-4718-9864-23F4DFC5703F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Techies.MoneyExchange.Tests", "Techies.MoneyExchange.Tests\Techies.MoneyExchange.Tests.csproj", "{B20271C1-7F14-4F2C-8274-844923F88C07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Techies.MoneyExchange.Application", "Techies.MoneyExchange.Application\Techies.MoneyExchange.Application.csproj", "{3D22C29D-552B-4F89-9360-5CC04ADDF74A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +39,22 @@ Global
 		{4B918AF7-0667-479D-ACDB-571E225DFC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B918AF7-0667-479D-ACDB-571E225DFC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B918AF7-0667-479D-ACDB-571E225DFC0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71B0294B-A5CC-4E1C-B868-D794D4B6297E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71B0294B-A5CC-4E1C-B868-D794D4B6297E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71B0294B-A5CC-4E1C-B868-D794D4B6297E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71B0294B-A5CC-4E1C-B868-D794D4B6297E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AC46A8E-EE69-4768-A569-2FEF46C177EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AC46A8E-EE69-4768-A569-2FEF46C177EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AC46A8E-EE69-4768-A569-2FEF46C177EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AC46A8E-EE69-4768-A569-2FEF46C177EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B20271C1-7F14-4F2C-8274-844923F88C07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B20271C1-7F14-4F2C-8274-844923F88C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B20271C1-7F14-4F2C-8274-844923F88C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B20271C1-7F14-4F2C-8274-844923F88C07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D22C29D-552B-4F89-9360-5CC04ADDF74A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D22C29D-552B-4F89-9360-5CC04ADDF74A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D22C29D-552B-4F89-9360-5CC04ADDF74A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D22C29D-552B-4F89-9360-5CC04ADDF74A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +62,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{BE83FB93-96AC-4648-B93C-ABDC3408009E} = {10F843A1-D298-4188-81F4-26CEC3D4F0A8}
 		{4B918AF7-0667-479D-ACDB-571E225DFC0D} = {C0B4F9C4-3159-4E7E-B908-5F1A806A24BD}
+		{71B0294B-A5CC-4E1C-B868-D794D4B6297E} = {1AB038E6-751F-480F-ABD7-4CF7C87FD48D}
+		{4AC46A8E-EE69-4768-A569-2FEF46C177EC} = {0221B659-D101-4459-B0A3-8215964A40F6}
+		{B20271C1-7F14-4F2C-8274-844923F88C07} = {D3295780-62A8-4718-9864-23F4DFC5703F}
+		{3D22C29D-552B-4F89-9360-5CC04ADDF74A} = {10F843A1-D298-4188-81F4-26CEC3D4F0A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E3D9C1DA-8312-4349-905D-1B66174DCD10}
