@@ -1,13 +1,23 @@
-<form [formGroup]="form">
-  <select formControlName="base">
-    <option value="">SELECT A CURRENCY</option>
-    <option *ngFor="let c of currencies" [ngValue]="c">{{ c }}</option>
-  </select>
-  <input formControlName="amount" />
-  <select formControlName="target">
-    <option value="">SELECT A CURRENCY</option>
-    <option *ngFor="let c of currencies" [ngValue]="c">{{ c }}</option>
-  </select>
-  <p>{{ convertedAmount }}</p>
-  <button (click)="currenciesSwitched.emit(null);">Switch</button>
+<form [formGroup]="form" class="">
+  <div class="form-group">
+    <label for="base">From</label>
+    <select formControlName="base" class="form-control">
+      <option value="">SELECT A CURRENCY</option>
+      <option *ngFor="let c of currencies" [ngValue]="c">{{ c }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+      <input formControlName="amount" class="form-control"/>
+  </div>
+  <div class="form-group">
+    <label for="target">From</label>
+    <select formControlName="target" class="form-control">
+      <option value="">SELECT A CURRENCY</option>
+      <option *ngFor="let c of currencies" [ngValue]="c">{{ c }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+      <p class="form-control">{{ convertedAmount }}</p>
+  </div>
+  <button class="btn btn-primary" (click)="currenciesSwitched.emit(null);">Switch</button>
 </form>

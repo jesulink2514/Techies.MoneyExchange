@@ -14,9 +14,13 @@ import { API_BASE_URL } from './shared/constants';
 import { SharedModule } from './shared/shared.module';
 import { ExchangeRateModule } from './exchange-rate/exchange-rate.module';
 
+
+import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
+import { ExchangeRateComponent } from './exchange-rate/exchange-rate/exchange-rate.component';
 import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
+import { RouterModule } from '@angular/router';
 
 export const metaReducers: MetaReducer<any>[] = !environment.production
   ? [storeFreeze]
@@ -31,14 +35,22 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
     BrowserModule,
     CoreModule,
     SharedModule,
+    RouterModule.forRoot([
+      { path: '', pathMatch: 'full', redirectTo: 'rates' },
+      {
+        path: 'rates', component: MainLayoutComponent, children: [
+          { path: '', component: ExchangeRateComponent }
+        ]
+      }
+    ]),
     StoreModule.forRoot({}, { metaReducers }),
     EffectsModule.forRoot([]),
     environment.production ? [] : StoreDevtoolsModule.instrument(),
-    ExchangeRateModule,
+    ExchangeRateModule
   ],
   providers: [
     { provide: API_BASE_URL, useValue: environment.apiBaseUrl }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent];
 })
 export class AppModule { }
