@@ -1,0 +1,12 @@
+<form [formGroup]="form">
+  <select formControlName="base">
+    <option value="">SELECT A CURRENCY</option>
+    <option *ngFor="let c of currencies" [ngValue]="c">{{ c }}</option>
+  </select>
+  <input formControlName="amount" />
+  <select formControlName="target">
+    <option value="">SELECT A CURRENCY</option>
+    <option *ngFor="let c of currencies" [ngValue]="c">{{ c }}</option>
+  </select>
+  <p>{{ convertedAmount }}</p>
+</form>

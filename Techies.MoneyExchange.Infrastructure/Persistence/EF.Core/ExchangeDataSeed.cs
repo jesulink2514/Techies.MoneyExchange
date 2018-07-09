@@ -5,6 +5,9 @@ using Techies.MoneyExchange.Domain;
 
 namespace Techies.MoneyExchange.Infrastructure.Persistence.EF.Core
 {
+    /// <summary>
+    /// Allow developers to seed initial data
+    /// </summary>
     public class ExchangeDataSeed : IDisposable
     {
         private readonly MoneyExchangeDbContext _dbContext;

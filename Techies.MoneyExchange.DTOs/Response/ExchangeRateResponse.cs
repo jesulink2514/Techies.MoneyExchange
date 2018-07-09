@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Techies.MoneyExchange.Application.ExchangeRate
+namespace Techies.MoneyExchange.DTOs.Response
 {
     public class ExchangeRateResponse
     {

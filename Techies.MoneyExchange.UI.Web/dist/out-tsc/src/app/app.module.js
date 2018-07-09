@@ -8,7 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var platform_browser_1 = require("@angular/platform-browser");
 var core_1 = require("@angular/core");
+var core_module_1 = require("./core/core.module");
+var constants_1 = require("./shared/constants");
+var shared_module_1 = require("./shared/shared.module");
+var exchange_rate_module_1 = require("./exchange-rate/exchange-rate.module");
 var app_component_1 = require("./app.component");
+var environment_1 = require("../environments/environment");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -18,9 +23,14 @@ var AppModule = /** @class */ (function () {
                 app_component_1.AppComponent
             ],
             imports: [
-                platform_browser_1.BrowserModule
+                platform_browser_1.BrowserModule,
+                core_module_1.CoreModule,
+                shared_module_1.SharedModule,
+                exchange_rate_module_1.ExchangeRateModule
             ],
-            providers: [],
+            providers: [
+                { provide: constants_1.API_BASE_URL, useValue: environment_1.environment.apiBaseUrl }
+            ],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

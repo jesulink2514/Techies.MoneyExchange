@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Techies.MoneyExchange.DTOs.Response;
 using Techies.MoneyExchange.Infrastructure.Persistence.EF.Core;
 
 namespace Techies.MoneyExchange.Application.ExchangeRate

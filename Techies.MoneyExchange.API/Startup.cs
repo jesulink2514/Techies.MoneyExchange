@@ -66,6 +66,9 @@ namespace Techies.MoneyExchange.API
             // ===== Add MVC ========
             services.AddMvc();
 
+            // ===== Add CORS
+            services.AddCors();
+
             var builder = new ContainerBuilder();
             builder.Populate(services);
 
@@ -89,7 +92,7 @@ namespace Techies.MoneyExchange.API
             {
                 app.UseDeveloperExceptionPage();
 
-                // ==== Initialize Seed Data ====
+                // ==== Migrate and initialize Seed Data ====
                 using (var serviceScope = app.ApplicationServices.CreateScope())
                 {
                     var scopeServiceProvider = serviceScope.ServiceProvider;
@@ -97,6 +100,10 @@ namespace Techies.MoneyExchange.API
                     db.Initialize().Wait();
                 }
             }
+
+            // ===== Use CORS ======
+            app.UseCors(builder =>
+                builder.WithOrigins(Configuration.GetValue<string>("CorsPolicy:Origin")));
 
             // ===== Use Authentication ======
             app.UseAuthentication();
