@@ -9,4 +9,5 @@
     <option *ngFor="let c of currencies" [ngValue]="c">{{ c }}</option>
   </select>
   <p>{{ convertedAmount }}</p>
+  <button (click)="currenciesSwitched.emit(null);">Switch</button>
 </form>

@@ -1,3 +1,11 @@
-<tme-exchange-rate-form [currencies]="currencies$ | async"></tme-exchange-rate-form>
+<tme-exchange-rate-form [currencies]="currencies$ | async"
+    (baseChanged)="onBaseChange($event)"
+    (targetChanged)="onTargetChange($event)" 
+    (amountChanged)="onAmountChange($event)"
+    (currenciesSwitched)="onCurrenciesSwitched()"
+    [base]="base$ | async" [target]="target$ | async" [convertedAmount]="convertedAmount$ | async"
+></tme-exchange-rate-form>
 
-<p>{{rate$ | async | number}}</p>
+<p>{{rate$ | async}}</p>
+
+<h5></h5>

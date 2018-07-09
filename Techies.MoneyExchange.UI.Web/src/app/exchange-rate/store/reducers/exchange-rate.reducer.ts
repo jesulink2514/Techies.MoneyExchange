@@ -14,7 +14,10 @@ export const initialState: ExchangeRateState = {
 
 export function reducer(state: ExchangeRateState = initialState, action: fromActions.ExchangeAction) {
     switch (action.type) {
-
+        case fromActions.SET_AMOUNT: {
+            const amount = action.payload;
+            return {...state, amount};
+        }
         case fromActions.SET_BASE_SYMBOL: {
             const target = state.targetSymbol === action.payload ? null : state.targetSymbol;
             return {
@@ -43,6 +46,12 @@ export function reducer(state: ExchangeRateState = initialState, action: fromAct
         case fromActions.LOAD_RATE_SUCCESS: {
             const rate = action.payload.rates[state.targetSymbol];
             return {...state, rate};
+        }
+
+        case fromActions.SWITCH_CURRENCIES: {
+            const targetSymbol = state.baseSymbol;
+            const baseSymbol = state.targetSymbol;
+            return {...state, targetSymbol, baseSymbol};
         }
 
     }
