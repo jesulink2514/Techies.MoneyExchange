@@ -1,0 +1,38 @@
+<div class="position-relative overflow-hidden p-3 m-0 text-center bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        <div class="row">
+          <h3 class="col-12">Currency Converter</h3>
+          <div class="col-sm-12 col-12 mb-0" *ngIf="rate" [@show]="1">
+            <p>
+              <span class="h4 font-weight-light text-secondary">{{amount| number:'3.1-4'}} </span>
+              <span class="currency-flag" *ngIf="baseSymbol" 
+                    [ngClass]="'currency-flag-'+baseSymbol.toLowerCase()"></span>
+              <span> {{baseSymbol}} =</span>
+              <span class="h2 font-weight-bold color-money"> {{convertedAmount| number:'3.1-6'}} </span>
+              <span class="currency-flag" *ngIf="targetSymbol" 
+                    [ngClass]="'currency-flag-'+targetSymbol.toLowerCase()"></span>
+              <span class="h4 font-weight-light text-secondary"> {{targetSymbol}}</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="rate" [@show]="1">
+          <div class="form-group col-sm-12 col-12">
+            <p class="h6 font-weight-light text-secondary">1 {{baseSymbol}} = {{rate| number:'3.1-6'}} {{targetSymbol}}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-sm-12 col-12">
+            <p class="h6 font-weight-light text-secondary">The <strong>Techies Money Exchange</strong> currency converter allows you to check how much you should get when you convert your currency into another. 
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

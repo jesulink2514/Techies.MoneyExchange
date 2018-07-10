@@ -25,6 +25,7 @@ import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
 import { TOKEN_ENDPOINT } from './login/login.constant';
 import { TokenInterceptor } from './core/authentication/token.interceptor';
+import { AuthGuard } from './core/authentication/auth.guard';
 
 
 export const metaReducers: MetaReducer<any>[] = !environment.production
@@ -43,7 +44,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
     RouterModule.forRoot([
       { path: '', pathMatch: 'full', redirectTo: 'rates' },
       {
-        path: 'rates', component: MainLayoutComponent, children: [
+        path: 'rates', component: MainLayoutComponent, canActivate: [AuthGuard],  children: [
           { path: '', component: ExchangeRateComponent }
         ],
       },

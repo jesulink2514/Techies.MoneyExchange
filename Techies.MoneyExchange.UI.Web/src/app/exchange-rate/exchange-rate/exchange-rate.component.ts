@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,7 @@ import * as fromSelectors from '../store/selectors';
 @Component({
   selector: 'tme-exchange-rate',
   templateUrl: './exchange-rate.component.html',
-  styleUrls: ['./exchange-rate.component.scss']
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExchangeRateComponent implements OnInit {
 
@@ -22,6 +22,7 @@ export class ExchangeRateComponent implements OnInit {
   base$: Observable<string>;
   target$: Observable<string>;
   convertedAmount$: Observable<number>;
+  amount$: Observable<number>;
 
   ngOnInit() {
     this.rate$ = this.store.select(fromSelectors.getExchangeRate);
@@ -29,6 +30,7 @@ export class ExchangeRateComponent implements OnInit {
 
     this.base$ = this.store.select(fromSelectors.getBaseSymbol);
     this.target$ = this.store.select(fromSelectors.getTargetSymbol);
+    this.amount$ = this.store.select(fromSelectors.getCurrentAmount);
     this.convertedAmount$ = this.store.select(fromSelectors.getConvertedAmount);
 
     this.store.dispatch(new fromActions.LoadCurrencies());

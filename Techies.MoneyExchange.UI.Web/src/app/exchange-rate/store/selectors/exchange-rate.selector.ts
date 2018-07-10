@@ -8,5 +8,6 @@ export const getTargetSymbol = createSelector(getExchangeRateState, state => sta
 export const getExchangeRateLoading = createSelector(getExchangeRateState, state => state.loading);
 export const getExchangeRateLoaded = createSelector(getExchangeRateState, state => state.loaded);
 
+export const getCurrentAmount = createSelector(getExchangeRateState, state => state.amount);
 export const getConvertedAmount = createSelector(getExchangeRateState, state =>
-    state.amount * (state.rate || 0));
+    (state.amount || 0) * (state.rate || 0));

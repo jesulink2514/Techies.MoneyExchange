@@ -1564,6 +1564,10 @@ cuint@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/cuint/-/cuint-0.2.2.tgz#408086d409550c2631155619e9fa7bcadc3b991b"
 
+currency-flags@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/currency-flags/-/currency-flags-1.7.1.tgz#44cc5fa82b7b14e03c603ad0cf126f40fdf23c07"
+
 currently-unhandled@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/currently-unhandled/-/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"
