@@ -10,13 +10,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var exchange_rate_service_1 = require("../exchange-rate.service");
+var store_1 = require("@ngrx/store");
+var fromActions = require("../store/actions");
+var fromSelectors = require("../store/selectors");
 var ExchangeRateComponent = /** @class */ (function () {
-    function ExchangeRateComponent(exchangeService) {
-        this.exchangeService = exchangeService;
+    function ExchangeRateComponent(store) {
+        this.store = store;
     }
     ExchangeRateComponent.prototype.ngOnInit = function () {
-        this.currencies$ = this.exchangeService.getAvailableCurrencies();
+        this.rate$ = this.store.select(fromSelectors.getExchangeRate);
+        this.currencies$ = this.store.select(fromSelectors.getCurrencies);
+        this.base$ = this.store.select(fromSelectors.getBaseSymbol);
+        this.target$ = this.store.select(fromSelectors.getTargetSymbol);
+        this.convertedAmount$ = this.store.select(fromSelectors.getConvertedAmount);
+        this.store.dispatch(new fromActions.LoadCurrencies());
+    };
+    ExchangeRateComponent.prototype.onBaseChange = function (base) {
+        this.store.dispatch(new fromActions.SetBaseSymbol(base));
+    };
+    ExchangeRateComponent.prototype.onTargetChange = function (base) {
+        this.store.dispatch(new fromActions.SetTargetSymbol(base));
+    };
+    ExchangeRateComponent.prototype.onAmountChange = function (amount) {
+        this.store.dispatch(new fromActions.SetAmount(amount));
+    };
+    ExchangeRateComponent.prototype.onCurrenciesSwitched = function () {
+        this.store.dispatch(new fromActions.SwitchCurrencies());
     };
     ExchangeRateComponent = __decorate([
         core_1.Component({
@@ -24,7 +43,7 @@ var ExchangeRateComponent = /** @class */ (function () {
             templateUrl: './exchange-rate.component.html',
             styleUrls: ['./exchange-rate.component.scss']
         }),
-        __metadata("design:paramtypes", [exchange_rate_service_1.ExchangeRateService])
+        __metadata("design:paramtypes", [store_1.Store])
     ], ExchangeRateComponent);
     return ExchangeRateComponent;
 }());

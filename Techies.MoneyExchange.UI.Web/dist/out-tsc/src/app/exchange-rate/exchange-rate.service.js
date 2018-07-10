@@ -16,7 +16,7 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
 var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
-var constants_1 = require("./../shared/constants");
+var constants_1 = require("../shared/constants");
 var ExchangeRateService = /** @class */ (function () {
     function ExchangeRateService(baseUrl, http) {
         this.baseUrl = baseUrl;

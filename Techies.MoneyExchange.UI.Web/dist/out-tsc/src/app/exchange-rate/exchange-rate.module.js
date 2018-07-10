@@ -8,10 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
-var exchange_rate_component_1 = require("./exchange-rate/exchange-rate.component");
 var http_1 = require("@angular/common/http");
-var exchange_rate_service_1 = require("./exchange-rate.service");
 var forms_1 = require("@angular/forms");
+var store_1 = require("@ngrx/store");
+var effects_1 = require("@ngrx/effects");
+var exchange_rate_component_1 = require("./exchange-rate/exchange-rate.component");
+var exchange_rate_service_1 = require("./exchange-rate.service");
+var store_2 = require("./store");
+var exchange_rate_form_component_1 = require("./exchange-rate-form/exchange-rate-form.component");
 var ExchangeRateModule = /** @class */ (function () {
     function ExchangeRateModule() {
     }
@@ -20,12 +24,14 @@ var ExchangeRateModule = /** @class */ (function () {
             imports: [
                 common_1.CommonModule,
                 http_1.HttpClientModule,
-                forms_1.ReactiveFormsModule
+                forms_1.ReactiveFormsModule,
+                store_1.StoreModule.forFeature('exchange', store_2.reducers),
+                effects_1.EffectsModule.forFeature(store_2.effects),
             ],
             exports: [
                 exchange_rate_component_1.ExchangeRateComponent
             ],
-            declarations: [exchange_rate_component_1.ExchangeRateComponent],
+            declarations: [exchange_rate_component_1.ExchangeRateComponent, exchange_rate_form_component_1.ExchangeRateFormComponent],
             providers: [
                 exchange_rate_service_1.ExchangeRateService
             ]
