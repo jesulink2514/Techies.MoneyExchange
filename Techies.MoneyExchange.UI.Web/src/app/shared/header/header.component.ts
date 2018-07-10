@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'tme-header',
-  template: `
-  <tme-header></tme-header>
-  <router-outlet></router-outlet>
-  <tme-footer></tme-footer>
-  `,
+  templateUrl: './header.component.html',
   styles: [
     `
   .bg-white {
@@ -16,11 +12,5 @@ import { Component, OnInit } from '@angular/core';
       font-weight: bold;
   }`]
 })
-export class HeaderComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class HeaderComponent  {
 }

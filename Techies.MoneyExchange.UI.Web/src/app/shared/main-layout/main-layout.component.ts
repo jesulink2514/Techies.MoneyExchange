@@ -8,11 +8,7 @@ import { Component, OnInit } from '@angular/core';
   <tme-footer></tme-footer>
   `
 })
-export class MainLayoutComponent implements OnInit {
+export class MainLayoutComponent {
 
   constructor() { }
-
-  ngOnInit() {
-  }
-
 }
