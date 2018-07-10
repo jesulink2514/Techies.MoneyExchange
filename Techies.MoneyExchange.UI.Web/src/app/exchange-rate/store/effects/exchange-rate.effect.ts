@@ -35,8 +35,7 @@ export class ExchangeRateEffect {
         .pipe(withLatestFrom(this.state))
         .pipe(filter(([action, state]) => {
             return state.baseSymbol && state.targetSymbol && state.baseSymbol !== state.targetSymbol;
-        }))
-        .pipe(map(([action, storeState]) => {
+        }), map(([action, storeState]) => {
             return new fromActions.LoadRate();
         }));
 }

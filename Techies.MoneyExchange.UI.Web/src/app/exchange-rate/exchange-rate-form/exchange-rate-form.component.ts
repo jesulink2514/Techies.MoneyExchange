@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { trigger, style, transition, animate, state } from '@angular/animations';
 import { filter, debounceTime } from 'rxjs/operators';
@@ -17,7 +17,7 @@ import { filter, debounceTime } from 'rxjs/operators';
   animations: [
     trigger('notice', [
       state('active', style({
-        transform: 'scale(1.04)'
+        transform: 'scale(1.03)'
       })),
       state('inactive', style({
         transform: 'scale(1)'
@@ -32,11 +32,15 @@ export class ExchangeRateFormComponent implements OnInit {
   @Input() currencies: string[] = [];
 
   @Input() set base(value: string) {
-    this.form.controls['base'].setValue(value);
+    if (this.form.value.base !== value) {
+      this.form.controls['base'].setValue(value);
+    }
   }
 
   @Input() set target(value: string) {
-    this.form.controls['target'].setValue(value);
+    if (this.form.value.target !== value) {
+      this.form.controls['target'].setValue(value);
+    }
   }
 
   @Input() amount: number;
@@ -64,10 +68,10 @@ export class ExchangeRateFormComponent implements OnInit {
 
   ngOnInit() {
     this.form.controls['base'].valueChanges.pipe(filter(_ => this.form.valid))
-        .subscribe(v => this.baseChanged.emit(v));
+      .subscribe(v => this.baseChanged.emit(v));
     this.form.controls['target'].valueChanges.pipe(filter(_ => this.form.valid))
-        .subscribe(v => this.targetChanged.emit(v));
+      .subscribe(v => this.targetChanged.emit(v));
     this.form.controls['amount'].valueChanges.pipe(debounceTime(300), filter(v => this.form.valid))
-        .subscribe(v => this.amountChanged.emit(v != null ? parseFloat(v) : null));
+      .subscribe(v => this.amountChanged.emit(v != null ? parseFloat(v) : null));
   }
 }
