@@ -51,6 +51,6 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
   providers: [
     { provide: API_BASE_URL, useValue: environment.apiBaseUrl }
   ],
-  bootstrap: [AppComponent];
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

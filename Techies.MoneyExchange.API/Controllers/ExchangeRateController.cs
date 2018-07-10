@@ -16,6 +16,7 @@ namespace Techies.MoneyExchange.API.Controllers
         }
 
         [Route("latest")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 10 * 60)]
         public async Task<IActionResult> GetLatest(string @base,string[] symbols)
         {
             var rate = await _exchangeRateReadingService.GetRatesAsync(@base,symbols);

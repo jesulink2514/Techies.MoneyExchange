@@ -12,4 +12,11 @@
     <PackageReference Include="MSTest.TestFramework" Version="1.2.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Techies.MoneyExchange.Application\Techies.MoneyExchange.Application.csproj" />
+    <ProjectReference Include="..\Techies.MoneyExchange.Domain\Techies.MoneyExchange.Domain.csproj" />
+    <ProjectReference Include="..\Techies.MoneyExchange.DTOs\Techies.MoneyExchange.DTOs.csproj" />
+    <ProjectReference Include="..\Techies.MoneyExchange.Infrastructure\Techies.MoneyExchange.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

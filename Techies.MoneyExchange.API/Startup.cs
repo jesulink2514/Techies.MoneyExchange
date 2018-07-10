@@ -12,9 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Techies.MoneyExchange.API.Data;
+using Techies.MoneyExchange.API.ExceptionHandling;
 using Techies.MoneyExchange.Infrastructure.Persistence.EF.Core;
 
 namespace Techies.MoneyExchange.API
@@ -100,10 +99,14 @@ namespace Techies.MoneyExchange.API
                     db.Initialize().Wait();
                 }
             }
+            else
+            {                
+                // ===== API Errors Handling
+                app.UseMiddleware<TechiesExceptionHandlerMiddleware>();
+            }
 
             // ===== Use CORS ======
-            app.UseCors(builder =>
-                builder.WithOrigins(Configuration.GetValue<string>("CorsPolicy:Origin")));
+            app.UseCors(builder => builder.WithOrigins(Configuration.GetValue<string>("CorsPolicy:Origin")));
 
             // ===== Use Authentication ======
             app.UseAuthentication();

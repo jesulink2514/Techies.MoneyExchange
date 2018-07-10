@@ -16,6 +16,7 @@ namespace Techies.MoneyExchange.API.Controllers
             _service = service;
         }
 
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 10 * 60)]
         public async Task<IActionResult> Get()
         {
             var currencies = await _service.GetAvailableCurrenciesAsync();
