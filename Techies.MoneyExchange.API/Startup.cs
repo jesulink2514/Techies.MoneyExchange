@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Techies.MoneyExchange.API.Data;
 using Techies.MoneyExchange.API.ExceptionHandling;
+using Techies.MoneyExchange.API.Extensions;
 using Techies.MoneyExchange.Infrastructure.Persistence.EF.Core;
 
 namespace Techies.MoneyExchange.API
@@ -44,6 +45,11 @@ namespace Techies.MoneyExchange.API
                 .AddDefaultTokenProviders();
             
             // ===== Add Jwt Authentication ========
+            var jwtIssuer = Configuration["JwtIssuer"];
+            var jwtkey = Configuration["JwtKey"];
+
+            services.Configure<JwtSettings>(Configuration);
+
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
             services
                 .AddAuthentication(options =>
@@ -51,7 +57,6 @@ namespace Techies.MoneyExchange.API
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                    
                 })
                 .AddJwtBearer(cfg =>
                 {
@@ -59,9 +64,9 @@ namespace Techies.MoneyExchange.API
                     cfg.SaveToken = true;
                     cfg.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidIssuer = Configuration["JwtIssuer"],
-                        ValidAudience = Configuration["JwtIssuer"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtKey"])),
+                        ValidIssuer = jwtIssuer,
+                        ValidAudience = jwtIssuer,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtkey)),
                         ClockSkew = TimeSpan.Zero // remove delay of token when expire
                     };
                 });
