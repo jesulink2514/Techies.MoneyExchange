@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using Techies.MoneyExchange.API.Data;
 using Techies.MoneyExchange.API.ExceptionHandling;
 using Techies.MoneyExchange.Infrastructure.Persistence.EF.Core;
@@ -30,6 +31,9 @@ namespace Techies.MoneyExchange.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            // ===== Add Logging ====
+            services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(dispose: true));
+
             // ===== Add our DbContexts ========
             services.AddDbContext<MoneyExchangeDbContext>(opt=> opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ApplicationDbContext>(opt=> opt.UseSqlServer(Configuration.GetConnectionString("SecurityConnection")));
@@ -87,6 +91,11 @@ namespace Techies.MoneyExchange.API
             ApplicationDbContext dbContext
         )
         {
+            // ==== Setting up Logger =====
+            var logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(Configuration)
+                .CreateLogger();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

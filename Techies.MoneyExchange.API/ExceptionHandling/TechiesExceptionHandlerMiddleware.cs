@@ -45,7 +45,8 @@ namespace Techies.MoneyExchange.API.ExceptionHandling
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
+                context.TraceIdentifier = Guid.NewGuid().ToString();
+                _logger.LogError(context.TraceIdentifier,ex, ex.Message);
                 context.Response.StatusCode = 500;
             }
 
@@ -65,7 +66,7 @@ namespace Techies.MoneyExchange.API.ExceptionHandling
                         response = ResponseDTO.Fail("User not authorized");
                         break;
                     default:
-                        response = ResponseDTO.Fail("An error has ocurred.");
+                        response = ResponseDTO.FailWithRequestId(context.TraceIdentifier,"An error has ocurred.");
                         break;
                 }
 
