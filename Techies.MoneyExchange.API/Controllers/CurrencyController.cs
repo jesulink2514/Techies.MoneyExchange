@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Techies.MoneyExchange.Application;
 using Techies.MoneyExchange.Application.Currency;
@@ -7,6 +8,7 @@ namespace Techies.MoneyExchange.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/currency")]
+    [Authorize]
     public class CurrencyController : Controller
     {
         private readonly CurrencyReadingService _service;

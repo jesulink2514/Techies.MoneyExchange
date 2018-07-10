@@ -9,5 +9,16 @@ namespace Techies.MoneyExchange.API.Data
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+        }
+
+        public ApplicationUser(string username)
+        {
+            UserName = username;
+            NormalizedEmail = username.ToUpperInvariant();
+            Email = username;
+            NormalizedEmail = username.ToUpperInvariant();
+        }
     }
 }

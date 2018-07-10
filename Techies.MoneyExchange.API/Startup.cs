@@ -40,7 +40,7 @@ namespace Techies.MoneyExchange.API
             services.AddDbContext<ApplicationDbContext>(opt=> opt.UseSqlServer(Configuration.GetConnectionString("SecurityConnection")));
             
             // ===== Add Identity ========
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser,IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             
@@ -92,8 +92,7 @@ namespace Techies.MoneyExchange.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
             IApplicationBuilder app, 
-            IHostingEnvironment env,
-            ApplicationDbContext dbContext
+            IHostingEnvironment env
         )
         {
             // ==== Setting up Logger =====
@@ -111,6 +110,15 @@ namespace Techies.MoneyExchange.API
                     var scopeServiceProvider = serviceScope.ServiceProvider;
                     var db = scopeServiceProvider.GetService<ExchangeDataSeed>();
                     db.Initialize().Wait();
+
+                    //add inital user
+                    var userManager = scopeServiceProvider.GetService<UserManager<ApplicationUser>>();
+                    const string username = "user@tester";
+                    const string password = "Pa$$123456";
+                    if (userManager.FindByEmailAsync(username).Result == null)
+                    {
+                        var result = userManager.CreateAsync(new ApplicationUser(username), password).Result;
+                    }
                 }
             }
             else
@@ -120,7 +128,7 @@ namespace Techies.MoneyExchange.API
             }
 
             // ===== Use CORS ======
-            app.UseCors(builder => builder.WithOrigins(Configuration.GetValue<string>("CorsPolicy:Origin")));
+            app.UseCors(builder => builder.WithOrigins(Configuration.GetValue<string>("CorsPolicy:Origin")).AllowAnyMethod().AllowCredentials().AllowAnyHeader());
 
             // ===== Use Authentication ======
             app.UseAuthentication();

@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { CoreModule } from './core/core.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { StoreModule, MetaReducer } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -10,10 +9,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
 
-import { API_BASE_URL } from './shared/constants';
 import { SharedModule } from './shared/shared.module';
 import { ExchangeRateModule } from './exchange-rate/exchange-rate.module';
+import { CoreModule } from './core/core.module';
 
+import { API_BASE_URL } from './shared/constants';
 
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 import { ExchangeRateComponent } from './exchange-rate/exchange-rate/exchange-rate.component';
@@ -24,6 +24,7 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
 import { TOKEN_ENDPOINT } from './login/login.constant';
+import { TokenInterceptor } from './core/authentication/token.interceptor';
 
 
 export const metaReducers: MetaReducer<any>[] = !environment.production
@@ -56,7 +57,12 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
   ],
   providers: [
     { provide: API_BASE_URL, useValue: environment.apiBaseUrl },
-    { provide: TOKEN_ENDPOINT, useValue: environment.tokenEndpoint}
+    { provide: TOKEN_ENDPOINT, useValue: environment.tokenEndpoint},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

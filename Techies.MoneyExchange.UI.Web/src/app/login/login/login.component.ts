@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tme-login',
@@ -13,7 +14,10 @@ export class LoginComponent implements OnInit {
   public form: FormGroup;
   public message: string;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) { }
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -36,7 +40,7 @@ export class LoginComponent implements OnInit {
     this.loginService.loginWithPassword(credentials.username, credentials.password)
       .subscribe(r => {
         localStorage.setItem('token', r);
-        this.form.enable();
+        this.router.navigate(['/']);
       }, e => {
         this.message = 'Invalid username or password.';
         this.form.enable();
