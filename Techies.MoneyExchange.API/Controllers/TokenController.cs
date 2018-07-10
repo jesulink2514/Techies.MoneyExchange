@@ -32,7 +32,7 @@ namespace Techies.MoneyExchange.API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("token")]
+        [Route("api/token")]
         public async Task<IActionResult> Post([FromBody]LoginModel loginViewModel)
         {
             if (ModelState.IsValid)

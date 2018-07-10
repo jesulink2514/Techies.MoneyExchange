@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:5976'
+  apiBaseUrl: 'http://localhost:5976',
+  tokenEndpoint: 'http://localhost:5976/api/token'
 };
 
 /*

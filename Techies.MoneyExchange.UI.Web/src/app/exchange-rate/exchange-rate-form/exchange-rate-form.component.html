@@ -1,23 +1,76 @@
-<form [formGroup]="form" class="">
-  <div class="form-group">
-    <label for="base">From</label>
-    <select formControlName="base" class="form-control">
-      <option value="">SELECT A CURRENCY</option>
-      <option *ngFor="let c of currencies" [ngValue]="c">{{ c }}</option>
-    </select>
+<div class="position-relative overflow-hidden p-3 m-0 text-center bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        <div class="row">
+          <div class="form-group col-sm-12 col-12 mb-0">
+            <p>
+              <span class="h4 font-weight-light text-secondary">29 USD =</span>
+              <span class="h2 font-weight-bold color-money"> 24.6787</span>
+              <span class="h4 font-weight-light text-secondary"> EUR</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-sm-12 col-12">
+            <p class="h6 font-weight-light text-secondary">1 USD = 0.850990 EUR</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-sm-12 col-12">
+            <p class="h6 font-weight-light text-secondary">The <strong>Techies Money Exchange</strong> currency converter allows you to check how much you should get when you convert your currency into another. 
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-      <input formControlName="amount" class="form-control"/>
+</div>
+
+<div class="position-relative overflow-hidden p-3 m-0 text-center bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        <form [formGroup]="form" class="">
+
+          <div class="row">
+            <div class="form-group col-sm-5 col-12">
+              <select formControlName="base" class="form-control">
+                <option value="">CHOOSE...</option>
+                <option *ngFor="let c of currencies" [ngValue]="c">{{ c }}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-sm-2 col-12">
+              <button class="btn btn-block btn-success p-0" title="Switch current" (click)="currenciesSwitched.emit(null);">
+                <img src="/assets/switch.svg" alt="switch icon" class="size-img" />
+              </button>
+            </div>
+
+            <div class="form-group col-sm-5 col-12">
+              <select formControlName="target" class="form-control">
+                <option value="">CHOOSE...</option>
+                <option *ngFor="let c of currencies" [ngValue]="c">{{ c }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row justify-content-between">
+            <div class="form-group col-sm-5 col-12">
+              <input formControlName="amount" autofocus class="form-control" />
+            </div>
+            <div class="form-group col-sm-5 col-12">
+              <p class="form-control">{{ convertedAmount }}</p>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="target">From</label>
-    <select formControlName="target" class="form-control">
-      <option value="">SELECT A CURRENCY</option>
-      <option *ngFor="let c of currencies" [ngValue]="c">{{ c }}</option>
-    </select>
-  </div>
-  <div class="form-group">
-      <p class="form-control">{{ convertedAmount }}</p>
-  </div>
-  <button class="btn btn-primary" (click)="currenciesSwitched.emit(null);">Switch</button>
-</form>
+</div>

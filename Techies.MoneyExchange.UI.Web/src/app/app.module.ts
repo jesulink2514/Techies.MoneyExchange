@@ -17,10 +17,14 @@ import { ExchangeRateModule } from './exchange-rate/exchange-rate.module';
 
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 import { ExchangeRateComponent } from './exchange-rate/exchange-rate/exchange-rate.component';
+import { LoginModule } from './login/login.module';
+import { LoginComponent } from './login/login/login.component';
 import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
+import { TOKEN_ENDPOINT } from './login/login.constant';
+
 
 export const metaReducers: MetaReducer<any>[] = !environment.production
   ? [storeFreeze]
@@ -40,16 +44,19 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
       {
         path: 'rates', component: MainLayoutComponent, children: [
           { path: '', component: ExchangeRateComponent }
-        ]
-      }
+        ],
+      },
+      { path: 'login', component: LoginComponent }
     ]),
     StoreModule.forRoot({}, { metaReducers }),
     EffectsModule.forRoot([]),
     environment.production ? [] : StoreDevtoolsModule.instrument(),
-    ExchangeRateModule
+    ExchangeRateModule,
+    LoginModule
   ],
   providers: [
-    { provide: API_BASE_URL, useValue: environment.apiBaseUrl }
+    { provide: API_BASE_URL, useValue: environment.apiBaseUrl },
+    { provide: TOKEN_ENDPOINT, useValue: environment.tokenEndpoint}
   ],
   bootstrap: [AppComponent]
 })

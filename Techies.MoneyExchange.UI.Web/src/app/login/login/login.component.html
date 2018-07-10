@@ -1,0 +1,23 @@
+<div class="form-container d-flex h-100">
+  <form [formGroup]="form" class="form-signin text-center align-self-center">
+
+    <img class="mb-1" src="/assets/logo.svg" alt="logo" width="72" height="72">
+
+    <h1 class="h3 mb-4">TechiesMoneyExchange</h1>
+
+    <h2 class="h4 mb-3 font-weight-normal">Please sign in</h2>
+
+    <label for="username" class="sr-only">Email address</label>
+
+    <input type="email" formControlName="username" class="form-control" placeholder="Email address" autofocus>
+
+    <label for="password" class="sr-only">Password</label>
+
+    <input type="password" formControlName="password" class="form-control" placeholder="Password">
+
+    <p class="alert alert-danger" role="alert" *ngIf="message">{{message}}</p>
+
+    <button class="btn btn-lg btn-primary btn-block" [disabled]="form.invalid"
+        (click)="login()">Sign in</button>
+  </form>
+</div>
